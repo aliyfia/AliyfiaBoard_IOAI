@@ -12,8 +12,8 @@
           "category": "ESP32",
           "url": "https://github.com/aliyfia/AliyfiaBoard_IOAI/archive/refs/tags/v1.0.0.zip",
           "archiveFileName": "AliyfiaBoard_IOAI-1.0.0.zip",
-          "checksum": "SHA-256:c1bb2eba0527ebf7ef6900c87e03bd78e43f847148ba09806af1d034247518f2",
-          "size": "48818036",
+          "checksum": "SHA-256:99a0bb3d51f31451ff4fe3916eb945263b20b2389d5e8a221a9e23921ba37a48",
+          "size": "48824097",
           "boards": [
             {
               "name": "AliyfiaBoard IOAI"
