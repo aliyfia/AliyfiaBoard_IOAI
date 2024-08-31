@@ -20,8 +20,8 @@
   "scripts": {
     "build": "arduino-cli compile --fqbn aliyfia:esp32:AliyfiaBoard_IOAI",
     "upload": "arduino-cli upload -p /dev/ttyUSB0 --fqbn aliyfia:esp32:AliyfiaBoard_IOAI",
-    "clean": "arduino-cli clean",
-    "test": "arduino-cli test"
+    "clean": "arduino-cli cache clean",
+    "test": "arduino-cli test --fqbn aliyfia:esp32:AliyfiaBoard_IOAI"
   },
   "author": "Afif Aliyfia A",
   "contributors": [
