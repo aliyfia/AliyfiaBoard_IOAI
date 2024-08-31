@@ -1,33 +1,138 @@
 {
-  "name": "framework-aliyfiaboard-ioai",
-  "version": "1.0.0",
-  "description": "Arduino Wiring-based Framework for the AliyfiaBoard_IOAI, built on ESP32, ESP32-S, and ESP32-C series of SoCs",
-  "keywords": [
-    "framework",
-    "arduino",
-    "aliyfiaboard",
-    "esp32",
-    "iot"
-  ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aliyfia/AliyfiaBoard_IOAI.git"
-  },
-  "dependencies": {
-    "esp32-arduino-lib-builder": "^1.0.0"
-  },
-  "scripts": {
-    "build": "arduino-cli compile --fqbn aliyfia:esp32:AliyfiaBoard_IOAI",
-    "upload": "arduino-cli upload -p /dev/ttyUSB0 --fqbn aliyfia:esp32:AliyfiaBoard_IOAI",
-    "clean": "arduino-cli cache clean",
-    "test": "arduino-cli test --fqbn aliyfia:esp32:AliyfiaBoard_IOAI"
-  },
-  "author": "Afif Aliyfia A",
-  "contributors": [
+  "packages": [
     {
-      "name": "Afif Aliyfia A",
-      "email": "aliyfiaalfi@gmail.com"
+      "name": "AliyfiaBoard_IOAI",
+      "maintainer": "Your Name",
+      "websiteURL": "https://github.com/aliyfia/AliyfiaBoard_IOAI",
+      "platforms": [
+        {
+          "name": "AliyfiaBoard IOAI",
+          "architecture": "esp32",
+          "version": "1.0.0",
+          "category": "ESP32",
+          "url": "https://github.com/aliyfia/AliyfiaBoard_IOAI/archive/refs/tags/v1.0.0.zip",
+          "archiveFileName": "AliyfiaBoard_IOAI-1.0.0.zip",
+          "checksum": "SHA-256:c1bb2eba0527ebf7ef6900c87e03bd78e43f847148ba09806af1d034247518f2",
+          "size": "48812492",
+          "boards": [
+            {
+              "name": "AliyfiaBoard IOAI"
+            }
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "esp32",
+              "name": "esp32-arduino-libs",
+              "version": "idf-release_v5.1-b6b4727c58"
+            },
+            {
+              "packager": "esp32",
+              "name": "esp-x32",
+              "version": "2302"
+            },
+            {
+              "packager": "esp32",
+              "name": "esp-xs2",
+              "version": "2302"
+            },
+            {
+              "packager": "esp32",
+              "name": "esp-xs3",
+              "version": "2302"
+            },
+            {
+              "packager": "esp32",
+              "name": "xtensa-esp-elf-gdb",
+              "version": "12.1_20231023"
+            },
+            {
+              "packager": "esp32",
+              "name": "esp-rv32",
+              "version": "2302"
+            },
+            {
+              "packager": "esp32",
+              "name": "riscv32-esp-elf-gdb",
+              "version": "12.1_20231023"
+            },
+            {
+              "packager": "esp32",
+              "name": "openocd-esp32",
+              "version": "v0.12.0-esp32-20240318"
+            },
+            {
+              "packager": "esp32",
+              "name": "esptool_py",
+              "version": "4.6"
+            },
+            {
+              "packager": "esp32",
+              "name": "mkspiffs",
+              "version": "0.2.3"
+            },
+            {
+              "packager": "esp32",
+              "name": "mklittlefs",
+              "version": "3.0.0-gnu12-dc7f933"
+            },
+            {
+              "packager": "arduino",
+              "name": "dfu-util",
+              "version": "0.11.0-arduino5"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "esp32-arduino-libs",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    {
+      "name": "esp-x32",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    {
+      "name": "esp-xs2",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    {
+      "name": "esp-xs3",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    {
+      "name": "xtensa-esp-elf-gdb",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    {
+      "name": "esp-rv32",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    {
+      "name": "riscv32-esp-elf-gdb",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    {
+      "name": "openocd-esp32",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    {
+      "name": "esptool_py",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    {
+      "name": "mkspiffs",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    {
+      "name": "mklittlefs",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
+    },
+    {
+      "name": "dfu-util",
+      "url": "https://espressif.github.io/arduino-esp32/package_esp32_index.json"
     }
   ]
 }
