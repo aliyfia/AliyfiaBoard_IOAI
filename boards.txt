@@ -45,10 +45,10 @@ esp32_family.build.board=ESP32_FAMILY
 ##############################################################
 
 ##############################################################
-# Custom Board: AliyfiaBoard_IOAI
+# Custom Board: ESP32S3_IOAI
 ##############################################################
 
-aliyfiaboard_ioai.name=AliyfiaBoard_IOAI
+aliyfiaboard_ioai.name=ESP32S3_IOAI
 
 aliyfiaboard_ioai.bootloader.tool=esptool_py
 aliyfiaboard_ioai.bootloader.tool.default=esptool_py
