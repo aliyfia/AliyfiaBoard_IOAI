@@ -2,18 +2,18 @@
   "packages": [
     {
       "name": "AliyfiaBoard_IOAI",
-      "maintainer": "Aliyfia",
+      "maintainer": "Your Name",
       "websiteURL": "https://github.com/aliyfia/AliyfiaBoard_IOAI",
       "platforms": [
         {
           "name": "AliyfiaBoard IOAI",
-          "architecture": "esp32",
-          "version": "1.0.0",
+          "architecture": "AliyfiaBoard_IOAI",
+          "version": "1.0.1",
           "category": "ESP32",
-          "url": "https://github.com/aliyfia/AliyfiaBoard_IOAI/archive/refs/tags/v1.0.0.zip",
-          "archiveFileName": "AliyfiaBoard_IOAI-1.0.0.zip",
-          "checksum": "SHA-256:c1bb2eba0527ebf7ef6900c87e03bd78e43f847148ba09806af1d034247518f2",
-          "size": "48818036",
+          "url": "https://github.com/aliyfia/AliyfiaBoard_IOAI/releases/download/v1.0.1/AliyfiaBoard_IOAI_v1.0.1.zip",
+          "archiveFileName": "AliyfiaBoard_IOAI_v1.0.1.zip",
+          "checksum": "SHA-256:dec2d103a2c4c4229781ec455fb34430c0e5e758f7d6ffc9fb899c5615a4a7e4",
+          "size": "48681657",
           "boards": [
             {
               "name": "AliyfiaBoard IOAI"
