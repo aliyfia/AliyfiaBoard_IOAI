@@ -1,0 +1,150 @@
+name=AliyfiaBoard_IOAI
+version=1.0.0
+
+tools.esp32-arduino-libs.path={runtime.tools.esp32-arduino-libs.path}
+
+tools.xtensa-esp32-elf-gcc.path={runtime.tools.esp-x32.path}
+tools.xtensa-esp32s2-elf-gcc.path={runtime.tools.esp-xs2.path}
+tools.xtensa-esp32s3-elf-gcc.path={runtime.tools.esp-xs3.path}
+tools.xtensa-esp-elf-gdb.path={runtime.tools.xtensa-esp-elf-gdb.path}
+tools.riscv32-esp-elf-gcc.path={runtime.tools.esp-rv32.path}
+tools.riscv32-esp-elf-gdb.path={runtime.tools.riscv32-esp-elf-gdb.path}
+
+tools.esptool_py.path={runtime.tools.esptool_py.path}
+tools.esptool_py.cmd=esptool
+tools.esptool_py.cmd.linux=esptool.py
+tools.esptool_py.cmd.windows=esptool.exe
+
+tools.esptool_py.network_cmd=python3 "{runtime.platform.path}/tools/espota.py" -r
+tools.esptool_py.network_cmd.windows="{runtime.platform.path}\tools\espota.exe" -r
+
+tools.esp_ota.cmd=python3 "{runtime.platform.path}/tools/espota.py" -r
+tools.esp_ota.cmd.windows="{runtime.platform.path}\tools\espota.exe" -r
+
+tools.gen_esp32part.cmd=python3 "{runtime.platform.path}/tools/gen_esp32part.py"
+tools.gen_esp32part.cmd.windows="{runtime.platform.path}\tools\gen_esp32part.exe"
+
+tools.gen_insights_pkg.cmd=python3 "{runtime.platform.path}"/tools/gen_insights_package.py
+tools.gen_insights_pkg.cmd.windows="{runtime.platform.path}\tools\gen_insights_package.exe"
+
+compiler.path={tools.{build.tarch}-{build.target}-elf-gcc.path}/bin/
+compiler.prefix={build.tarch}-{build.target}-elf-
+
+compiler.sdk.path={tools.esp32-arduino-libs.path}/{build.mcu}
+compiler.sdk.path.windows={tools.esp32-arduino-libs.path}\{build.mcu}
+
+# Optimization flags
+compiler.optimization_flags=-Os
+compiler.optimization_flags.release=-Os
+compiler.optimization_flags.debug=-Og -g3
+
+# Arduino Compile Warning Levels
+compiler.warning_flags=-w
+compiler.warning_flags.none=-w
+compiler.warning_flags.default=
+compiler.warning_flags.more=-Wall
+compiler.warning_flags.all=-Wall -Wextra
+
+# Compile Flags
+compiler.cpreprocessor.flags="@{compiler.sdk.path}/flags/defines" "-I{build.source.path}" -iprefix "{compiler.sdk.path}/include/" "@{compiler.sdk.path}/flags/includes" "-I{compiler.sdk.path}/{build.memory_type}/include"
+compiler.c.flags="@{compiler.sdk.path}/flags/c_flags" {compiler.warning_flags} {compiler.optimization_flags}
+compiler.cpp.flags="@{compiler.sdk.path}/flags/cpp_flags" {compiler.warning_flags} {compiler.optimization_flags}
+compiler.S.flags="@{compiler.sdk.path}/flags/S_flags" {compiler.warning_flags} {compiler.optimization_flags}
+compiler.c.elf.flags="@{compiler.sdk.path}/flags/ld_flags" "@{compiler.sdk.path}/flags/ld_scripts"
+compiler.c.elf.libs="@{compiler.sdk.path}/flags/ld_libs"
+compiler.ar.flags=cr
+
+# Compilers
+compiler.c.cmd={compiler.prefix}gcc
+compiler.cpp.cmd={compiler.prefix}g++
+compiler.S.cmd={compiler.prefix}gcc
+compiler.c.elf.cmd={compiler.prefix}g++
+compiler.as.cmd={compiler.prefix}as
+compiler.ar.cmd={compiler.prefix}gcc-ar
+compiler.size.cmd={compiler.prefix}size
+
+# These can be overridden in platform.local.txt
+compiler.c.extra_flags=-MMD -c
+compiler.cpp.extra_flags=-MMD -c
+compiler.S.extra_flags=-MMD -c -x assembler-with-cpp
+compiler.c.elf.extra_flags="-Wl,--Map={build.path}/{build.project_name}.map" "-L{compiler.sdk.path}/lib" "-L{compiler.sdk.path}/ld" "-L{compiler.sdk.path}/{build.memory_type}" "-Wl,--wrap=esp_panic_handler"
+compiler.ar.extra_flags=
+compiler.objcopy.eep.extra_flags=
+compiler.elf2hex.extra_flags=
+compiler.libraries.ldflags=
+
+# Target dependent definitions
+build.extra_flags.esp32=-DARDUINO_USB_CDC_ON_BOOT=0
+build.extra_flags.esp32s3=-DARDUINO_USB_MODE={build.usb_mode} -DARDUINO_USB_CDC_ON_BOOT={build.cdc_on_boot} -DARDUINO_USB_MSC_ON_BOOT={build.msc_on_boot} -DARDUINO_USB_DFU_ON_BOOT={build.dfu_on_boot}
+build.extra_flags.esp32s2=-DARDUINO_USB_MODE=0 -DARDUINO_USB_CDC_ON_BOOT={build.cdc_on_boot} -DARDUINO_USB_MSC_ON_BOOT={build.msc_on_boot} -DARDUINO_USB_DFU_ON_BOOT={build.dfu_on_boot}
+build.extra_flags.esp32c2=-DARDUINO_USB_CDC_ON_BOOT=0
+build.extra_flags.esp32c3=-DARDUINO_USB_MODE=1 -DARDUINO_USB_CDC_ON_BOOT={build.cdc_on_boot}
+build.extra_flags.esp32c6=-DARDUINO_USB_MODE=1 -DARDUINO_USB_CDC_ON_BOOT={build.cdc_on_boot}
+build.extra_flags.esp32h2=-DARDUINO_USB_MODE=1 -DARDUINO_USB_CDC_ON_BOOT={build.cdc_on_boot}
+
+# This can be overridden in boards.txt
+build.zigbee_mode=
+build.zigbee_libs=
+build.flash_size=4MB
+build.flash_mode=dio
+build.flash_freq=80m
+build.img_freq={build.flash_freq}
+build.boot=qio
+build.boot_freq={build.flash_freq}
+build.bootloader_addr=0x1000
+build.custom_bootloader=bootloader
+build.custom_partitions=partitions
+build.code_debug=0
+build.defines=
+build.loop_core=
+build.event_core=
+build.extra_flags=-DARDUINO_HOST_OS="{runtime.os}" -DARDUINO_FQBN="{build.fqbn}" -DESP32 -DCORE_DEBUG_LEVEL={build.code_debug} {build.loop_core} {build.event_core} {build.defines} {build.extra_flags.{build.mcu}} {build.zigbee_mode}
+build.extra_libs=
+build.memory_type={build.boot}_qspi
+
+## Compile c files
+recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.extra_flags} {compiler.c.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} -DARDUINO_BOARD="{build.board}" -DARDUINO_VARIANT="{build.variant}" -DARDUINO_PARTITION_{build.partitions} {build.extra_flags} {compiler.cpreprocessor.flags} {includes} "@{build.opt.path}" "@{file_opts.path}" "{source_file}" -o "{object_file}"
+
+## Compile c++ files
+recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.extra_flags} {compiler.cpp.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} -DARDUINO_BOARD="{build.board}" -DARDUINO_VARIANT="{build.variant}" -DARDUINO_PARTITION_{build.partitions} {build.extra_flags} {compiler.cpreprocessor.flags} {includes} "@{build.opt.path}" "@{file_opts.path}" "{source_file}" -o "{object_file}"
+
+## Compile S files
+recipe.S.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.S.extra_flags} {compiler.S.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} -DARDUINO_BOARD="{build.board}" -DARDUINO_VARIANT="{build.variant}" -DARDUINO_PARTITION_{build.partitions} {build.extra_flags} {compiler.cpreprocessor.flags} {includes} "@{build.opt.path}" "@{file_opts.path}" "{source_file}" -o "{object_file}"
+
+## Create archives
+recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{archive_file_path}" "{object_file}"
+
+## Combine gc-sections, archives, and objects
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} {compiler.c.elf.extra_flags} -Wl,--start-group {object_files} "{archive_file_path}" {build.extra_libs} {build.zigbee_libs} {compiler.c.elf.libs} {compiler.libraries.ldflags} -Wl,--end-group -Wl,-EL -o "{build.path}/{build.project_name}.elf"
+
+## Create partitions.bin
+recipe.objcopy.partitions.bin.pattern={tools.gen_esp32part.cmd} -q "{build.path}/partitions.csv" "{build.path}/{build.project_name}.partitions.bin"
+
+## Create bin
+recipe.objcopy.bin.pattern_args=--chip {build.mcu} elf2image --flash_mode "{build.flash_mode}" --flash_freq "{build.img_freq}" --flash_size "{build.flash_size}" --elf-sha256-offset 0xb0 -o "{build.path}/{build.project_name}.bin" "{build.path}/{build.project_name}.elf"
+recipe.objcopy.bin.pattern="{tools.esptool_py.path}/{tools.esptool_py.cmd}" {recipe.objcopy.bin.pattern_args}
+recipe.objcopy.bin.pattern.linux=python3 "{tools.esptool_py.path}/{tools.esptool_py.cmd}" {recipe.objcopy.bin.pattern_args}
+
+# AliyfiaBoard_IOAI debug configuration
+debug_script.esp32s3=esp32s3-builtin.cfg
+debug_config.esp32s3.cortex-debug.custom.name=Arduino on AliyfiaBoard_IOAI
+debug_config.esp32s3.cortex-debug.custom.overrideAttachCommands.0=set remote hardware-watchpoint-limit 2
+debug_config.esp32s3.cortex-debug.custom.overrideAttachCommands.1=monitor reset halt
+debug_config.esp32s3.cortex-debug.custom.overrideAttachCommands.2=monitor gdb_sync
+debug_config.esp32s3.cortex-debug.custom.overrideAttachCommands.3=thb setup
+debug_config.esp32s3.cortex-debug.custom.overrideAttachCommands.4=c
+debug_config.esp32s3.cortex-debug.custom.overrideRestartCommands.0=monitor reset halt
+debug_config.esp32s3.cortex-debug.custom.overrideRestartCommands.1=monitor gdb_sync
+
+# Upload Sketch Through OTA (Arduino IDE 2.x)
+tools.esp_ota.upload.protocol=network
+tools.esp_ota.upload.field.password=Password
+tools.esp_ota.upload.field.password.secret=true
+tools.esp_ota.upload.pattern={cmd} -i {upload.port.address} -p {upload.port.properties.port} --auth={upload.field.password} -f "{build.path}/{build.project_name}.bin"
+
+# Program Application
+tools.esptool_py.program.params.verbose=
+tools.esptool_py.program.params.quiet=
+tools.esptool_py.program.pattern_args=--chip {build.mcu} --port "{serial.port}" --baud {upload.speed} {upload.flags} --before default_reset --after hard_reset write_flash -z --flash_mode keep --flash_freq keep --flash_size keep 0x10000 "{build.path}/{build.project_name}.bin"
+tools.esptool_py.program.pattern="{path}/{cmd}" {program.pattern_args}
+tools.esptool_py.program.pattern.linux=python3 "{path}/{cmd}" {program.pattern_args}

@@ -1,0 +1,33 @@
+{
+  "name": "framework-aliyfiaboard-ioai",
+  "version": "1.0.0",
+  "description": "Arduino Wiring-based Framework for the AliyfiaBoard_IOAI, built on ESP32, ESP32-S, and ESP32-C series of SoCs",
+  "keywords": [
+    "framework",
+    "arduino",
+    "aliyfiaboard",
+    "esp32",
+    "iot"
+  ],
+  "license": "LGPL-2.1-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aliyfia/AliyfiaBoard_IOAI.git"
+  },
+  "dependencies": {
+    "esp32-arduino-lib-builder": "^1.0.0"
+  },
+  "scripts": {
+    "build": "arduino-cli compile --fqbn aliyfia:esp32:AliyfiaBoard_IOAI",
+    "upload": "arduino-cli upload -p /dev/ttyUSB0 --fqbn aliyfia:esp32:AliyfiaBoard_IOAI",
+    "clean": "arduino-cli clean",
+    "test": "arduino-cli test"
+  },
+  "author": "Afif Aliyfia A",
+  "contributors": [
+    {
+      "name": "Afif Aliyfia A",
+      "email": "aliyfiaalfi@gmail.com"
+    }
+  ]
+}
