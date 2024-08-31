@@ -7,13 +7,13 @@
       "platforms": [
         {
           "name": "AliyfiaBoard IOAI",
-          "architecture": "esp32",
+          "architecture": "AliyfiaBoard_IOAI",
           "version": "1.0.1",
           "category": "ESP32",
           "url": "https://github.com/aliyfia/AliyfiaBoard_IOAI/releases/download/v1.0.1/AliyfiaBoard_IOAI_v1.0.1.zip",
           "archiveFileName": "AliyfiaBoard_IOAI_v1.0.1.zip",
-          "checksum": "SHA-256:99a0bb3d51f31451ff4fe3916eb945263b20b2389d5e8a221a9e23921ba37a48",
-          "size": "48824097",
+          "checksum": "SHA-256:dec2d103a2c4c4229781ec455fb34430c0e5e758f7d6ffc9fb899c5615a4a7e4",
+          "size": "48681657",
           "boards": [
             {
               "name": "AliyfiaBoard IOAI"
